@@ -10,6 +10,7 @@ export const register = async (req, res) => {
 
   const hashedPassword = await hashPassword(req.body.password);
   req.body.password = hashedPassword;
+  console.log(1111);
 
   const user = await User.create(req.body);
   res.status(StatusCodes.CREATED).json({ user });
