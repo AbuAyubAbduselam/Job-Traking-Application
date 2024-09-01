@@ -1,8 +1,12 @@
-import styled from 'styled-components';
+import styled from "styled-components";
 
 const Wrapper = styled.aside`
   @media (min-width: 992px) {
     display: none;
+  }
+
+  .logo {
+    width: 100px;
   }
   .sidebar-container {
     position: fixed;

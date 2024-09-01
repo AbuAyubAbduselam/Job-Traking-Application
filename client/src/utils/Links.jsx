@@ -1,15 +1,39 @@
-import { IoBarChartSharp } from "react-icons/io5";
-import { MdQueryStats } from "react-icons/md";
-import { FaWpforms } from "react-icons/fa";
-import { ImProfile } from "react-icons/im";
-import { MdAdminPanelSettings } from "react-icons/md";
+import {
+  UserOutlined,
+  TeamOutlined,
+  ScheduleOutlined,
+  ReadOutlined,
+  BarChartOutlined,
+  DollarOutlined,
+} from "@ant-design/icons";
 
 const links = [
-  { text: "add job", path: ".", icon: <FaWpforms /> },
-  { text: "all jobs", path: "all-jobs", icon: <MdQueryStats /> },
-  { text: "stats", path: "stats", icon: <IoBarChartSharp /> },
-  { text: "profile", path: "profile", icon: <ImProfile /> },
-  { text: "admin", path: "admin", icon: <MdAdminPanelSettings /> },
+  {
+    text: "Students",
+    path: "",
+    icon: <TeamOutlined />,
+    subLinks: [
+      { text: "Add Student", path: "." },
+      { text: "All Student", path: "all-students" },
+    ],
+  },
+  {
+    text: "Teachers",
+    path: "all-jobs",
+    icon: <UserOutlined />,
+  },
+  {
+    text: "Attendance",
+    path: "",
+    icon: <ScheduleOutlined />,
+    subLinks: [
+      { text: "Student Attendance", path: "student-attendance" },
+      { text: "Teacher Attendance", path: "teacher-attendance" },
+    ],
+  },
+  { text: "Results", path: "results", icon: <ReadOutlined /> },
+  { text: "Finance", path: "finance", icon: <DollarOutlined /> },
+  { text: "Stats", path: "stats", icon: <BarChartOutlined /> },
 ];
 
 export default links;

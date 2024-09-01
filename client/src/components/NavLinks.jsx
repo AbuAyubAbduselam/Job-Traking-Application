@@ -1,29 +1,60 @@
-import DashboardLayout, { useDashboardContext } from "../pages/DashboardLayout";
-import links from "../utils/Links";
+import { useState } from "react";
+import { Menu } from "antd";
+
 import { NavLink } from "react-router-dom";
+import { useDashboardContext } from "../pages/DashboardLayout";
+import links from "../utils/Links";
+
+const { SubMenu } = Menu;
 
 const NavLinks = ({ isBigSidebar }) => {
   const { toggleSidebar, user } = useDashboardContext();
+  const [openKeys, setOpenKeys] = useState([]);
+
+  const handleOpenChange = (keys) => {
+    setOpenKeys(keys);
+  };
+
   return (
-    <div className="nav-links">
+    <Menu
+      mode="inline"
+      openKeys={openKeys}
+      onOpenChange={handleOpenChange}
+      style={{ width: 256 }}
+      className="flex flex-col gap-4 bg-[var( --background-color)]"
+    >
       {links.map((link) => {
-        const { text, path, icon } = link;
+        const { text, path, icon, subLinks } = link;
         const { role } = user;
-        if (path === "admin" && role !== "admin") return;
+        if (path === "admin" && role !== "admin") return null;
+
+        if (subLinks) {
+          return (
+            <SubMenu key={text} icon={icon} title={text}>
+              {subLinks.map((subLink) => (
+                <Menu.Item key={subLink.text}>
+                  <NavLink
+                    to={subLink.path}
+                    onClick={isBigSidebar ? null : toggleSidebar}
+                  >
+                    {subLink.text}
+                  </NavLink>
+                </Menu.Item>
+              ))}
+            </SubMenu>
+          );
+        }
+
         return (
-          <NavLink
-            to={path}
-            key={text}
-            className="nav-link"
-            onClick={isBigSidebar ? null : toggleSidebar}
-            end
-          >
-            <span className="icon">{icon}</span>
-            {text}
-          </NavLink>
+          <Menu.Item key={text} icon={icon}>
+            <NavLink to={path} onClick={isBigSidebar ? null : toggleSidebar}>
+              {text}
+            </NavLink>
+          </Menu.Item>
         );
       })}
-    </div>
+    </Menu>
   );
 };
+
 export default NavLinks;

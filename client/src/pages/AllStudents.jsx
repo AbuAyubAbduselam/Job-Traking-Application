@@ -1,19 +1,19 @@
 import { toast } from "react-toastify";
-import { JobsContainer, SearchContainer } from "../components";
+import { StudentsContainer, SearchContainer } from "../components";
 import customFetch from "../utils/customFetch";
 import { useLoaderData } from "react-router-dom";
 import { useContext, createContext } from "react";
 
 export const loader = async ({ request }) => {
-  console.log(request.url);
   const params = Object.fromEntries([
     ...new URL(request.url).searchParams.entries(),
   ]);
 
   try {
-    const { data } = await customFetch.get("/jobs", {
+    const { data } = await customFetch.get("/students", {
       params,
     });
+
     return { data, selectedParams: { ...params } };
   } catch (error) {
     toast.error(error?.response?.data?.msg);
@@ -21,19 +21,20 @@ export const loader = async ({ request }) => {
   }
 };
 
-const AllJobsContext = createContext();
+const AllStudentsContext = createContext();
 
-const AllJobs = () => {
+const AllStudents = () => {
   const { data, selectedParams } = useLoaderData();
+  console.log(data);
 
   return (
-    <AllJobsContext.Provider value={{ data, selectedParams }}>
+    <AllStudentsContext.Provider value={{ data, selectedParams }}>
       <SearchContainer />
-      <JobsContainer />
-    </AllJobsContext.Provider>
+      <StudentsContainer />
+    </AllStudentsContext.Provider>
   );
 };
 
-export const useAllJobsContext = () => useContext(AllJobsContext);
+export const useAllStudentsContext = () => useContext(AllStudentsContext);
 
-export default AllJobs;
+export default AllStudents;

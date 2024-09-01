@@ -1,5 +1,5 @@
 import Wrapper from "../assets/wrappers/Dashboard";
-import { BigSidebar, Navbar, SmallSidebar } from "../components";
+import { BigSidebar, Loading, Navbar, SmallSidebar } from "../components";
 import { createContext, useContext, useState } from "react";
 import {
   Navigate,
@@ -7,6 +7,7 @@ import {
   redirect,
   useLoaderData,
   useNavigate,
+  useNavigation, // Add this import
 } from "react-router-dom";
 import customFetch from "../utils/customFetch";
 import { toast } from "react-toastify";
@@ -18,13 +19,16 @@ export const loader = async () => {
     const { data } = await customFetch("/users/current-user");
     return data;
   } catch (error) {
-    return redirect("/");
+    toast.error("Failed to load user data");
+    return redirect("/"); // Redirecting to login page on error
   }
 };
 
 const DashboardLayout = ({ isDarkThemeEnabled }) => {
   const { user } = useLoaderData();
   const navigate = useNavigate();
+  const navigation = useNavigation(); // Get navigation object
+  const isPageLoading = navigation.state === "loading";
 
   const [showSidebar, setShowSidebar] = useState(false);
   const [isDarkTheme, setIsDarkTheme] = useState(isDarkThemeEnabled);
@@ -41,9 +45,13 @@ const DashboardLayout = ({ isDarkThemeEnabled }) => {
   };
 
   const logoutUser = async () => {
-    navigate("/");
-    await customFetch.get("/auth/logout");
-    toast.success("Logout Successfully");
+    try {
+      await customFetch.get("/auth/logout");
+      toast.success("Logout Successfully");
+      navigate("/"); // Redirect after successful logout
+    } catch (error) {
+      toast.error("Failed to logout");
+    }
   };
 
   return (
@@ -64,7 +72,7 @@ const DashboardLayout = ({ isDarkThemeEnabled }) => {
           <div>
             <Navbar />
             <div className="dashboard-page">
-              <Outlet context={{ user }} />
+              {isPageLoading ? <Loading /> : <Outlet context={{ user }} />}
             </div>
           </div>
         </main>
@@ -72,5 +80,6 @@ const DashboardLayout = ({ isDarkThemeEnabled }) => {
     </DashboardContext.Provider>
   );
 };
+
 export const useDashboardContext = () => useContext(DashboardContext);
 export default DashboardLayout;

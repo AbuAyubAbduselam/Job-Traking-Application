@@ -1,5 +1,8 @@
 /* ============= GLOBAL CSS =============== */
 
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
 *,
 ::after,
 ::before {
@@ -14,17 +17,16 @@ html {
 
 :root {
   /* colors */
-  --primary-50: #eff6ff;
-  --primary-100: #dbeafe;
-  --primary-200: #bfdbfe;
-  --primary-300: #93c5fd;
-  --primary-400: #60a5fa;
-  --primary-500: #3b82f6;
-  --primary-600: #2563eb;
-  --primary-700: #1d4ed8;
-  --primary-800: #1e40af;
-  --primary-900: #1e3a8a;
-
+  --primary-50: #d1fae5;
+  --primary-100: #a7f3d0;
+  --primary-200: #6ee7b7;
+  --primary-300: #34d399;
+  --primary-400: #10b981;
+  --primary-500: #059669;
+  --primary-600: #047857;
+  --primary-700: #065f46;
+  --primary-800: #064e3b;
+  --primary-900: #022c22;
   /* grey */
   --grey-50: #f8fafc;
   --grey-100: #f1f5f9;
@@ -90,6 +92,7 @@ body {
     Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
   font-weight: 400;
   line-height: 1;
+  margin: 0;
 }
 p {
   margin: 0;
@@ -284,15 +287,6 @@ button:disabled {
   to {
     transform: rotate(360deg);
   }
-}
-
-.loading {
-  width: 6rem;
-  height: 6rem;
-  border: 5px solid var(--grey-400);
-  border-radius: 50%;
-  border-top-color: var(--primary-500);
-  animation: spinner 0.6s linear infinite;
 }
 
 /* title */

@@ -6,12 +6,14 @@ const app = express();
 import morgan from "morgan";
 import mongoose from "mongoose";
 import cookieParser from "cookie-parser";
+import upload from "express-fileupload";
 import cloudinary from "cloudinary";
 
 //routes
-import jobRouter from "./routes/jobRouter.js";
+import studentRouter from "./routes/studentRouter.js";
 import authRouter from "./routes/authRouter.js";
 import userRouter from "./routes/userRouter.js";
+import attendanceRouter from "./routes/attendanceRouter.js";
 //public
 import { dirname } from "path";
 import { fileURLToPath } from "url";
@@ -22,6 +24,13 @@ import errorHandlerMiddleware from "./middleware/errorHandlerMiddleware.js";
 import { authenticateUser } from "./middleware/authMiddleware.js";
 
 app.use(cookieParser());
+app.use(
+  upload({
+    useTempFiles: true,
+    tempFileDir: "/tmp/",
+    limits: { fileSize: 50 * 1024 * 1024 },
+  })
+);
 app.use(express.json());
 
 if (process.env.NODE_ENV === "development") {
@@ -38,9 +47,10 @@ const __dirname = dirname(fileURLToPath(import.meta.url));
 
 app.use(express.static(path.resolve(__dirname, "./public")));
 
-app.use("/api/v1/jobs", authenticateUser, jobRouter);
+app.use("/api/v1/students", authenticateUser, studentRouter);
 app.use("/api/v1/users", authenticateUser, userRouter);
 app.use("/api/v1/auth", authRouter);
+app.use("/api/v1/attendance", attendanceRouter);
 
 app.get("*", (req, res) => {
   res.sendFile(path.resolve(__dirname, "./public", "index.html"));

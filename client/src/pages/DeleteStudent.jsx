@@ -4,10 +4,10 @@ import { toast } from "react-toastify";
 
 export async function action({ params }) {
   try {
-    await customFetch.delete(`/jobs/${params.id}`);
-    toast.success("Job deleted successfully");
+    await customFetch.delete(`/students/${params.id}`);
+    toast.success("Student deleted successfully");
   } catch (error) {
     toast.error(error.response.data.msg);
   }
-  return redirect("/dashboard/all-jobs");
+  return redirect("/dashboard/all-students");
 }

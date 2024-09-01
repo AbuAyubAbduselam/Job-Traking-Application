@@ -7,21 +7,23 @@ import {
   DashboardLayout,
   Error,
   Landing,
-  AddJob,
+  AddStudent,
   Stats,
-  AllJobs,
+  AllStudents,
   Profile,
   Admin,
-  EditJob,
+  EditStudent,
+  StudentAttendance,
+  TeacherAttendance,
+  About,
+  Contact,
 } from "./pages";
-import { action as registerAction } from "./pages/Register";
 import { action as loginAction } from "./pages/Login";
-import { action as addJobAction } from "./pages/AddJob";
 import { loader as dashboardLoader } from "./pages/DashboardLayout";
-import { loader as allJobsLoader } from "./pages/AllJobs";
-import { loader as editJobLoader } from "./pages/EditJob";
-import { action as editJobAction } from "./pages/EditJob";
-import { action as deleteJobAction } from "./pages/DeleteJob";
+import { loader as allStudentsLoader } from "./pages/AllStudents";
+import { loader as editStudentLoader } from "./pages/EditStudent";
+import { action as editStudentAction } from "./pages/EditStudent";
+import { action as deleteStudentAction } from "./pages/DeleteStudent";
 import { loader as adminLoader } from "./pages/Admin";
 import { action as profileAction } from "./pages/Profile";
 import { loader as statsLoader } from "./pages/Stats";
@@ -43,15 +45,24 @@ const router = createBrowserRouter([
         index: true,
         element: <Landing />,
       },
+
       {
-        path: "register",
-        element: <Register />,
-        action: registerAction,
-      },
-      {
-        path: "login",
+        path: "admin-login",
         element: <Login />,
         action: loginAction,
+      },
+      {
+        path: "teacher-login",
+        element: <Login />,
+        action: loginAction,
+      },
+      {
+        path: "about",
+        element: <About />,
+      },
+      {
+        path: "contact",
+        element: <Contact />,
       },
       {
         path: "dashboard",
@@ -60,8 +71,7 @@ const router = createBrowserRouter([
         children: [
           {
             index: true,
-            element: <AddJob />,
-            action: addJobAction,
+            element: <AddStudent />,
           },
           {
             path: "stats",
@@ -69,10 +79,21 @@ const router = createBrowserRouter([
             loader: statsLoader,
           },
           {
-            path: "all-jobs",
-            element: <AllJobs />,
-            loader: allJobsLoader,
+            path: "all-students",
+            element: <AllStudents />,
+            loader: allStudentsLoader,
           },
+          {
+            path: "student-attendance",
+            element: <StudentAttendance />,
+            loader: allStudentsLoader,
+          },
+          {
+            path: "teacher-attendance",
+            element: <TeacherAttendance />,
+            loader: allStudentsLoader,
+          },
+
           {
             path: "profile",
             element: <Profile />,
@@ -84,14 +105,14 @@ const router = createBrowserRouter([
             loader: adminLoader,
           },
           {
-            path: "edit-job/:id",
-            element: <EditJob />,
-            loader: editJobLoader,
-            action: editJobAction,
+            path: "edit-student/:id",
+            element: <EditStudent />,
+            loader: editStudentLoader,
+            action: editStudentAction,
           },
           {
-            path: "delete-job/:id",
-            action: deleteJobAction,
+            path: "delete-student/:id",
+            action: deleteStudentAction,
           },
         ],
       },

@@ -1,9 +1,10 @@
-import styled from 'styled-components';
+import styled from "styled-components";
 
 const Wrapper = styled.div`
   display: flex;
   align-items: center;
-  .job-icon {
+
+  .student-icon {
     font-size: 1rem;
     margin-right: 1rem;
     display: flex;
@@ -12,7 +13,12 @@ const Wrapper = styled.div`
       color: var(--text-secondary-color);
     }
   }
-  .job-text {
+  .student-label {
+    text-transform: capitalize;
+    letter-spacing: var(--letter-spacing);
+    margin-right: 8px;
+  }
+  .student-text {
     text-transform: capitalize;
     letter-spacing: var(--letter-spacing);
   }

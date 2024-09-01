@@ -1,11 +1,12 @@
-import styled from 'styled-components';
+import styled from "styled-components";
 
-const Wrapper = styled.article`
+const Card = styled.article`
   background: var(--background-secondary-color);
   border-radius: var(--border-radius);
   display: grid;
   grid-template-rows: 1fr auto;
   box-shadow: var(--shadow-2);
+
   header {
     padding: 1rem 1.5rem;
     border-bottom: 1px solid var(--grey-100);
@@ -13,6 +14,26 @@ const Wrapper = styled.article`
     grid-template-columns: auto 1fr;
     align-items: center;
   }
+
+  .avatar-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 20px;
+  }
+
+  .below-avatar {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1rem;
+  }
+
+  .name-id {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
+
   .main-icon {
     width: 60px;
     height: 60px;
@@ -26,6 +47,7 @@ const Wrapper = styled.article`
     color: var(--white);
     margin-right: 2rem;
   }
+
   .info {
     h5 {
       margin-bottom: 0.5rem;
@@ -37,20 +59,7 @@ const Wrapper = styled.article`
       color: var(--text-secondary-color);
     }
   }
-  .content {
-    padding: 1rem 1.5rem;
-  }
-  .content-center {
-    display: grid;
-    margin-top: 1rem;
-    margin-bottom: 1.5rem;
-    grid-template-columns: 1fr;
-    row-gap: 1.5rem;
-    align-items: center;
-    @media (min-width: 576px) {
-      grid-template-columns: 1fr 1fr;
-    }
-  }
+
   .status {
     border-radius: var(--border-radius);
     text-transform: capitalize;
@@ -61,11 +70,14 @@ const Wrapper = styled.article`
     display: grid;
     align-items: center;
   }
+
   .actions {
     margin-top: 1rem;
     display: flex;
-    align-items: center;
+    justify-content: space-between;
+    margin: 4rem 0 2rem 2rem;
   }
+
   .edit-btn,
   .delete-btn {
     height: 30px;
@@ -73,9 +85,16 @@ const Wrapper = styled.article`
     display: flex;
     align-items: center;
   }
+
   .edit-btn {
     margin-right: 0.5rem;
   }
+
+  @media (max-width: 430px) {
+    .below-avatar {
+      grid-template-columns: repeat(1, 1fr);
+    }
+  }
 `;
 
-export default Wrapper;
+export default Card;

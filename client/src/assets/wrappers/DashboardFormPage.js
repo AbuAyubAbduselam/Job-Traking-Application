@@ -1,4 +1,4 @@
-import styled from 'styled-components';
+import styled from "styled-components";
 
 const Wrapper = styled.section`
   border-radius: var(--border-radius);
@@ -21,7 +21,9 @@ const Wrapper = styled.section`
   }
   .form-center {
     display: grid;
+    column-gap: 1rem;
     row-gap: 1rem;
+    grid-template-columns: 1fr 1fr 1fr;
   }
   .form-btn {
     align-self: end;
@@ -29,16 +31,17 @@ const Wrapper = styled.section`
     display: grid;
     place-items: center;
   }
-  @media (min-width: 992px) {
+  @media (max-width: 750px) {
     .form-center {
       grid-template-columns: 1fr 1fr;
       align-items: center;
       column-gap: 1rem;
+      row-gap: 1rem;
     }
   }
-  @media (min-width: 1120px) {
+  @media (max-width: 400px) {
     .form-center {
-      grid-template-columns: 1fr 1fr 1fr;
+      grid-template-columns: 1fr;
     }
   }
 `;

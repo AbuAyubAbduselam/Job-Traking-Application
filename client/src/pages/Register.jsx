@@ -10,7 +10,7 @@ export const action = async ({ request }) => {
   try {
     await customFetch.post("/auth/register", data);
     toast.success("Registration successful");
-    return redirect("/login");
+    return redirect("/teacher-login");
   } catch (error) {
     toast.error(error?.response?.data?.msg);
     console.log(error);
@@ -32,7 +32,7 @@ const Register = () => {
         <SubmitBtn />
         <p>
           Already a member?
-          <Link to="/login" className="member-btn">
+          <Link to="/teacher-login" className="member-btn">
             Login
           </Link>
         </p>

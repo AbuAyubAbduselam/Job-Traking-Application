@@ -5,7 +5,7 @@ import { useDashboardContext } from "../pages/DashboardLayout";
 const ThemeToggle = () => {
   const { isDarkTheme, toggleDarkTheme } = useDashboardContext();
   return (
-    <Wrapper onClick={toggleDarkTheme}>
+    <Wrapper>
       {isDarkTheme ? (
         <BsFillSunFill className="toggle-icon" />
       ) : (
